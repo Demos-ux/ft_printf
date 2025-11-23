@@ -1,0 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsisli <dsisli@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/26 17:48:41 by dsisli            #+#    #+#             */
+/*   Updated: 2025/10/30 15:14:54 by dsisli           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FTPRINTF_H
+#define FTPRINTF_H
+
+#include <stdio.h>
+#include <stdarg.h>
+#include <unistd.h>
+
+typedef struct s_format t_format;
+
+typedef	struct s_formatype
+{
+	char	type;
+	int		(*func)(t_format *fmt);
+}	t_fmttype;
+
+typedef struct	s_format
+{
+	va_list	ap;
+	char	*format;
+	int		i;
+	int		total;
+
+	int		flag_minus;
+	int		flag_zero;
+	int		flag_plus;
+	int		flag_space;
+	int		flag_hash;
+	int		width;
+	int		precision;
+
+}	t_format;
+
+
+int	ft_putstr(t_format *fmt);
+int	ft_putchar(t_format *fmt);
+int	ft_puthex(t_format *fmt);
+int	ft_putbhex(t_format *fmt);
+int	ft_putnbr(t_format *fmt);
+int	ft_formatchecker(t_format *fmt);
+int	ft_printf(const char *format, ...);
+int	ft_putpercent(t_format *fmt);
+int	ft_putpointer(t_format *fmt);
+
+
+#endif
