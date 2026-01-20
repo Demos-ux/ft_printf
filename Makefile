@@ -6,7 +6,7 @@
 #    By: dsisli <dsisli@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/26 17:43:43 by dsisli            #+#    #+#              #
-#    Updated: 2025/10/30 15:15:50 by dsisli           ###   ########.fr        #
+#    Updated: 2026/01/20 14:30:04 by dsisli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ srcs = ft_printf.c \
 	ft_puthex.c \
 	ft_putbhex.c \
 	ft_putpercent.c \
-	ft_putpointer.c
+	ft_putpointer.c \
+	ft_putunint.c \
+	ft_putunint.c
 
 obj = $(srcs:.c=.o)
 

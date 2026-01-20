@@ -6,7 +6,7 @@
 /*   By: dsisli <dsisli@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 13:10:56 by dsisli            #+#    #+#             */
-/*   Updated: 2025/10/30 15:48:36 by dsisli           ###   ########.fr       */
+/*   Updated: 2026/01/20 14:25:59 by dsisli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_formatchecker(t_format *fmt)
         {'x', ft_puthex},
         {'X', ft_putbhex},
         {'%', ft_putpercent},
+        {'u', ft_putunint},
         {'\0', NULL}
     };
     int			i;

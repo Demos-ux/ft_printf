@@ -6,7 +6,7 @@
 /*   By: dsisli <dsisli@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:48:41 by dsisli            #+#    #+#             */
-/*   Updated: 2025/10/30 15:14:54 by dsisli           ###   ########.fr       */
+/*   Updated: 2026/01/20 14:31:22 by dsisli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	ft_formatchecker(t_format *fmt);
 int	ft_printf(const char *format, ...);
 int	ft_putpercent(t_format *fmt);
 int	ft_putpointer(t_format *fmt);
+int	ft_putunint(t_format *fmt);
 
 
 #endif

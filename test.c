@@ -6,7 +6,7 @@
 /*   By: dsisli <dsisli@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 15:50:00 by dsisli            #+#    #+#             */
-/*   Updated: 2025/10/30 15:52:16 by dsisli           ###   ########.fr       */
+/*   Updated: 2026/01/20 14:38:03 by dsisli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,154 +14,142 @@
 #include <stdio.h>
 #include <limits.h>
 
+void    print_result(char *desc, int ret_ft, int ret_og)
+{
+    if (ret_ft == ret_og)
+        printf("✅ [%s] OK (ret: %d)\n", desc, ret_ft);
+    else
+        printf("❌ [%s] FAIL (ft: %d, og: %d)\n", desc, ret_ft, ret_og);
+}
+
 int main(void)
 {
-    int ret;
-    char *str = "Hello World";
+    int ret_ft, ret_og;
+    char *str = "Hello";
     char *null_str = NULL;
-    void *ptr = &ret;
-    void *null_ptr = NULL;
+    int num = 42;
+    void *ptr = &num;
 
-    printf("Testing ft_printf with various edge cases:\n\n");
+    printf("\n======== FT_PRINTF MANDATORY TESTS ========\n\n");
 
-    // Basic string
-    printf("1. Basic string:\n");
-    ret = ft_printf("Hello World\n");
-    printf("Return value: %d\n\n", ret);
+    // 1. %c Character
+    printf("--- Test %%c ---\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%c", 'A'); printf("\n");
+    printf("OG: "); ret_og = printf("%c", 'A'); printf("\n");
+    print_result("Char 'A'", ret_ft, ret_og);
+    printf("\n");
 
-    // %s with normal string
-    printf("2. %%s with normal string:\n");
-    ret = ft_printf("String: %s\n", str);
-    printf("Return value: %d\n\n", ret);
+    // 2. %s String
+    printf("--- Test %%s ---\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%s", str); printf("\n");
+    printf("OG: "); ret_og = printf("%s", str); printf("\n");
+    print_result("String 'Hello'", ret_ft, ret_og);
 
-    // %s with NULL string
-    printf("3. %%s with NULL string:\n");
-    ret = ft_printf("String: %s\n", null_str);
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("NULL %s", null_str); printf("\n");
+    printf("OG: "); ret_og = printf("NULL %s", null_str); printf("\n");
+    print_result("String NULL", ret_ft, ret_og);
 
-    // %s with empty string
-    printf("4. %%s with empty string:\n");
-    ret = ft_printf("String: %s\n", "");
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("Empty %s", ""); printf("\n");
+    printf("OG: "); ret_og = printf("Empty %s", ""); printf("\n");
+    print_result("String Empty", ret_ft, ret_og);
+    printf("\n");
 
-    // %c with normal char
-    printf("5. %%c with normal char:\n");
-    ret = ft_printf("Char: %c\n", 'A');
-    printf("Return value: %d\n\n", ret);
+    // 3. %p Pointer
+    printf("--- Test %%p ---\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%p", ptr); printf("\n");
+    printf("OG: "); ret_og = printf("%p", ptr); printf("\n");
+    print_result("Pointer &num", ret_ft, ret_og);
 
-    // %c with null char
-    printf("6. %%c with null char:\n");
-    ret = ft_printf("Char: %c\n", '\0');
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%p", NULL); printf("\n");
+    printf("OG: "); ret_og = printf("%p", NULL); printf("\n");
+    print_result("Pointer NULL", ret_ft, ret_og);
+    printf("\n");
 
-    // %d with positive int
-    printf("7. %%d with positive int:\n");
-    ret = ft_printf("Int: %d\n", 42);
-    printf("Return value: %d\n\n", ret);
+    // 4. %d Decimal
+    printf("--- Test %%d ---\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%d", 12345); printf("\n");
+    printf("OG: "); ret_og = printf("%d", 12345); printf("\n");
+    print_result("Decimal 12345", ret_ft, ret_og);
 
-    // %d with negative int
-    printf("8. %%d with negative int:\n");
-    ret = ft_printf("Int: %d\n", -42);
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%d", -12345); printf("\n");
+    printf("OG: "); ret_og = printf("%d", -12345); printf("\n");
+    print_result("Decimal -12345", ret_ft, ret_og);
 
-    // %d with zero
-    printf("9. %%d with zero:\n");
-    ret = ft_printf("Int: %d\n", 0);
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%d", INT_MIN); printf("\n");
+    printf("OG: "); ret_og = printf("%d", INT_MIN); printf("\n");
+    print_result("Decimal INT_MIN", ret_ft, ret_og);
 
-    // %d with INT_MAX
-    printf("10. %%d with INT_MAX:\n");
-    ret = ft_printf("Int: %d\n", INT_MAX);
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%d", INT_MAX); printf("\n");
+    printf("OG: "); ret_og = printf("%d", INT_MAX); printf("\n");
+    print_result("Decimal INT_MAX", ret_ft, ret_og);
 
-    // %d with INT_MIN
-    printf("11. %%d with INT_MIN:\n");
-    ret = ft_printf("Int: %d\n", INT_MIN);
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%d", 0); printf("\n");
+    printf("OG: "); ret_og = printf("%d", 0); printf("\n");
+    print_result("Decimal 0", ret_ft, ret_og);
+    
+    printf("\n");
 
-    // %i with positive int
-    printf("12. %%i with positive int:\n");
-    ret = ft_printf("Int: %i\n", 42);
-    printf("Return value: %d\n\n", ret);
+    // 5. %i Integer
+    printf("--- Test %%i ---\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%i", 12345); printf("\n");
+    printf("OG: "); ret_og = printf("%i", 12345); printf("\n");
+    print_result("Integer 12345", ret_ft, ret_og);
+    printf("\n");
 
-    // %i with negative int
-    printf("13. %%i with negative int:\n");
-    ret = ft_printf("Int: %i\n", -42);
-    printf("Return value: %d\n\n", ret);
+    // 6. %u Unsigned
+    printf("--- Test %%u ---\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%u", 12345); printf("\n");
+    printf("OG: "); ret_og = printf("%u", 12345); printf("\n");
+    print_result("Unsigned 12345", ret_ft, ret_og);
 
-    // %x with positive hex
-    printf("14. %%x with positive hex:\n");
-    ret = ft_printf("Hex: %x\n", 255);
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%u", -1); printf("\n");
+    printf("OG: "); ret_og = printf("%u", -1); printf("\n");
+    print_result("Unsigned -1", ret_ft, ret_og);
 
-    // %x with zero
-    printf("15. %%x with zero:\n");
-    ret = ft_printf("Hex: %x\n", 0);
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%u", 0); printf("\n");
+    printf("OG: "); ret_og = printf("%u", 0); printf("\n");
+    print_result("Unsigned 0", ret_ft, ret_og);
+    printf("\n");
 
-    // %x with large number
-    printf("16. %%x with large number:\n");
-    ret = ft_printf("Hex: %x\n", 4294967295U);
-    printf("Return value: %d\n\n", ret);
+    // 7. %x Hex Lower
+    printf("--- Test %%x ---\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%x", 0); printf("\n");
+    printf("OG: "); ret_og = printf("%x", 0); printf("\n");
+    print_result("Hex 0", ret_ft, ret_og);
 
-    // %X with positive hex
-    printf("17. %%X with positive hex:\n");
-    ret = ft_printf("Hex: %X\n", 255);
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%x", -1); printf("\n");
+    printf("OG: "); ret_og = printf("%x", -1); printf("\n");
+    print_result("Hex -1", ret_ft, ret_og);
+    printf("\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%x", 0); printf("\n");
+    printf("OG: "); ret_og = printf("%x", 0); printf("\n");
+    print_result("Hex 0", ret_ft, ret_og);
+    printf("\n");
 
-    // %X with zero
-    printf("18. %%X with zero:\n");
-    ret = ft_printf("Hex: %X\n", 0);
-    printf("Return value: %d\n\n", ret);
+    // 8. %X Hex Upper
+    printf("--- Test %%X ---\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%X", 255); printf("\n");
+    // 9. %% Percent
+    printf("--- Test %%%% ---\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%%"); printf("\n");
+    printf("OG: "); ret_og = printf("%%"); printf("\n");
+    print_result("Percent %%", ret_ft, ret_og);
 
-    // %X with large number
-    printf("19. %%X with large number:\n");
-    ret = ft_printf("Hex: %X\n", 4294967295U);
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%%c"); printf("\n");
+    printf("OG: "); ret_og = printf("%%c"); printf("\n");
+    print_result("Percent %%c", ret_ft, ret_og);
 
-    // %p with normal pointer
-    printf("20. %%p with normal pointer:\n");
-    ret = ft_printf("Pointer: %p\n", ptr);
-    printf("Return value: %d\n\n", ret);
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("%%%%%%"); printf("\n");
+    printf("OG: "); ret_og = printf("%%%%%%"); printf("\n");
+    print_result("Percent %%%%%%", ret_ft, ret_og);
+    printf("\n");
 
-    // %p with NULL pointer
-    printf("21. %%p with NULL pointer:\n");
-    ret = ft_printf("Pointer: %p\n", null_ptr);
-    printf("Return value: %d\n\n", ret);
+    // 10. Mixed
+    printf("--- Test Mixed ---\n");
+    printf("FT: "); fflush(stdout); ret_ft = ft_printf("Char: %c, Str: %s, Int: %d", 'X', "Test", 42); printf("\n");
+    printf("OG: "); ret_og = printf("Char: %c, Str: %s, Int: %d", 'X', "Test", 42); printf("\n");
+    print_result("Mixed", ret_ft, ret_og);
+    printf("\n");
 
-    // %% percent
-    printf("22. %%%% percent:\n");
-    ret = ft_printf("Percent: %%\n");
-    printf("Return value: %d\n\n", ret);
-
-    // Combination of multiple specifiers
-    printf("23. Combination:\n");
-    ret = ft_printf("%s %d %x %p %%\n", str, -42, 255, ptr);
-    printf("Return value: %d\n\n", ret);
-
-    // Empty format string
-    printf("24. Empty format string:\n");
-    ret = ft_printf("");
-    printf("Return value: %d\n\n", ret);
-
-    // Only percent without specifier (should not crash, but undefined behavior)
-    printf("25. Only percent without specifier:\n");
-    ret = ft_printf("%");
-    printf("Return value: %d\n\n", ret);
-
-    // Multiple percents
-    printf("26. Multiple percents:\n");
-    ret = ft_printf("%% %% %%\n");
-    printf("Return value: %d\n\n", ret);
-
-    // Large string
-    printf("27. Large string:\n");
-    char large_str[1001];
-    for (int i = 0; i < 1000; i++) large_str[i] = 'a';
-    large_str[1000] = '\0';
-    ret = ft_printf("Large: %s\n", large_str);
-    printf("Return value: %d\n\n", ret);
-
-    printf("All tests completed.\n");
-    return 0;
+    return (0);
 }

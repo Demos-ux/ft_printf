@@ -1,0 +1,126 @@
+========================================
+Running Tests at Tue Jan 20 02:42:14 PM CET 2026
+========================================
+rm -f ft_printf.o ft_formatchecker.o ft_putchar.o ft_putnbr.o ft_putstr.o ft_puthex.o ft_putbhex.o ft_putpercent.o ft_putpointer.o ft_putunint.o ft_putunint.o
+rm -f ft_printf.a
+cc -Wall -Wextra -Werror -c ft_printf.c -o ft_printf.o
+cc -Wall -Wextra -Werror -c ft_formatchecker.c -o ft_formatchecker.o
+cc -Wall -Wextra -Werror -c ft_putchar.c -o ft_putchar.o
+cc -Wall -Wextra -Werror -c ft_putnbr.c -o ft_putnbr.o
+cc -Wall -Wextra -Werror -c ft_putstr.c -o ft_putstr.o
+cc -Wall -Wextra -Werror -c ft_puthex.c -o ft_puthex.o
+cc -Wall -Wextra -Werror -c ft_putbhex.c -o ft_putbhex.o
+cc -Wall -Wextra -Werror -c ft_putpercent.c -o ft_putpercent.o
+cc -Wall -Wextra -Werror -c ft_putpointer.c -o ft_putpointer.o
+cc -Wall -Wextra -Werror -c ft_putunint.c -o ft_putunint.o
+ar rcs ft_printf.a ft_printf.o ft_formatchecker.o ft_putchar.o ft_putnbr.o ft_putstr.o ft_puthex.o ft_putbhex.o ft_putpercent.o ft_putpointer.o ft_putunint.o ft_putunint.o
+----------------------------------------
+Test Output:
+--- Valgrind Output ---
+==1199074== Memcheck, a memory error detector
+==1199074== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1199074== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1199074== Command: ./test
+==1199074== 
+
+======== FT_PRINTF MANDATORY TESTS ========
+
+--- Test %c ---
+FT: A
+OG: A
+✅ [Char 'A'] OK (ret: 1)
+
+--- Test %s ---
+FT: Hello
+OG: Hello
+✅ [String 'Hello'] OK (ret: 5)
+FT: NULL (null)
+OG: NULL (null)
+✅ [String NULL] OK (ret: 11)
+FT: Empty 
+OG: Empty 
+✅ [String Empty] OK (ret: 6)
+
+--- Test %p ---
+FT: 0x1ffefff83c
+OG: 0x1ffefff83c
+✅ [Pointer &num] OK (ret: 12)
+FT: (nil)
+OG: (nil)
+✅ [Pointer NULL] OK (ret: 5)
+
+--- Test %d ---
+FT: 12345
+OG: 12345
+✅ [Decimal 12345] OK (ret: 5)
+FT: -12345
+OG: -12345
+✅ [Decimal -12345] OK (ret: 6)
+FT: -2147483648
+OG: -2147483648
+✅ [Decimal INT_MIN] OK (ret: 11)
+FT: 2147483647
+OG: 2147483647
+✅ [Decimal INT_MAX] OK (ret: 10)
+FT: 0
+OG: 0
+✅ [Decimal 0] OK (ret: 1)
+
+--- Test %i ---
+FT: 12345
+OG: 12345
+✅ [Integer 12345] OK (ret: 5)
+
+--- Test %u ---
+FT: 12345
+OG: 12345
+✅ [Unsigned 12345] OK (ret: 5)
+FT: 4294967295
+OG: 4294967295
+✅ [Unsigned -1] OK (ret: 10)
+FT: 0
+OG: 0
+✅ [Unsigned 0] OK (ret: 1)
+
+--- Test %x ---
+FT: 0
+OG: 0
+✅ [Hex 0] OK (ret: 1)
+FT: ffffffff
+OG: ffffffff
+✅ [Hex -1] OK (ret: 8)
+
+FT: 0
+OG: 0
+✅ [Hex 0] OK (ret: 1)
+
+--- Test %X ---
+FT: FF
+--- Test %% ---
+FT: %
+OG: %
+✅ [Percent %%] OK (ret: 1)
+FT: %c
+OG: %c
+✅ [Percent %%c] OK (ret: 2)
+FT: %%%
+OG: %%%
+✅ [Percent %%%%%%] OK (ret: 3)
+
+--- Test Mixed ---
+FT: Char: X, Str: Test, Int: 42
+OG: Char: X, Str: Test, Int: 42
+✅ [Mixed] OK (ret: 27)
+
+==1199074== 
+==1199074== HEAP SUMMARY:
+==1199074==     in use at exit: 0 bytes in 0 blocks
+==1199074==   total heap usage: 1 allocs, 1 frees, 4,096 bytes allocated
+==1199074== 
+==1199074== All heap blocks were freed -- no leaks are possible
+==1199074== 
+==1199074== For lists of detected and suppressed errors, rerun with: -s
+==1199074== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+========================================
+End of Test

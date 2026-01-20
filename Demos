@@ -1,0 +1,53 @@
+#!/bin/bash
+# Demos - Test script for ft_printf
+
+LOGFILE="test_results.log"
+
+# Define colors
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+echo "========================================" > "$LOGFILE"
+echo "Running Tests at $(date)" >> "$LOGFILE"
+echo "========================================" >> "$LOGFILE"
+
+echo -e "${GREEN}Building project...${NC}"
+# Run make and capture output/errors to log
+make re >> "$LOGFILE" 2>&1
+
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Make failed! Check $LOGFILE for details.${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}Compiling test...${NC}"
+cc -o test test.c ft_printf.a >> "$LOGFILE" 2>&1
+
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Test compilation failed! Check $LOGFILE for details.${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}Running test...${NC}"
+echo "----------------------------------------" >> "$LOGFILE"
+echo "Test Output:" >> "$LOGFILE"
+
+# Check if valgrind exists
+if command -v valgrind &> /dev/null; then
+    echo -e "${GREEN}Valgrind detected. Running with memory check...${NC}"
+    echo "--- Valgrind Output ---" >> "$LOGFILE"
+    # Run with valgrind, showing output on screen and logging to file.
+    # We redirect valgrind stderr to stdout so it appears in the pipe to tee.
+    valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./test 2>&1 | tee -a "$LOGFILE"
+else
+    echo -e "${RED}Valgrind not found. Running normal test.${NC}"
+    echo "To test for leaks, install valgrind: sudo apt install valgrind"
+    ./test | tee -a "$LOGFILE"
+fi
+
+echo "" >> "$LOGFILE"
+echo "========================================" >> "$LOGFILE"
+echo "End of Test" >> "$LOGFILE"
+
+echo -e "\n${GREEN}Done! Log saved to $LOGFILE${NC}"
