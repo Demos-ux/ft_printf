@@ -6,26 +6,25 @@
 /*   By: dsisli <dsisli@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:48:41 by dsisli            #+#    #+#             */
-/*   Updated: 2026/01/20 14:31:22 by dsisli           ###   ########.fr       */
+/*   Updated: 2026/01/20 15:16:04 by dsisli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FTPRINTF_H
-#define FTPRINTF_H
-
-#include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
 
-typedef struct s_format t_format;
+#ifndef FT_PRINTF_H
+#define FT_PRINTF_H
 
-typedef	struct s_formatype
+typedef struct s_format	t_format;
+
+typedef struct s_formatype
 {
 	char	type;
 	int		(*func)(t_format *fmt);
 }	t_fmttype;
 
-typedef struct	s_format
+typedef struct s_format
 {
 	va_list	ap;
 	char	*format;
@@ -42,7 +41,6 @@ typedef struct	s_format
 
 }	t_format;
 
-
 int	ft_putstr(t_format *fmt);
 int	ft_putchar(t_format *fmt);
 int	ft_puthex(t_format *fmt);
@@ -53,6 +51,5 @@ int	ft_printf(const char *format, ...);
 int	ft_putpercent(t_format *fmt);
 int	ft_putpointer(t_format *fmt);
 int	ft_putunint(t_format *fmt);
-
 
 #endif
