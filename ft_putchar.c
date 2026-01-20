@@ -12,10 +12,11 @@
 
 #include "ft_printf.h"
 
-int	ft_putchar(t_format	*fmt)
+int	ft_putchar(t_format *fmt)
 {
 	char	c;
-	c = va_arg(fmt->ap,int);
-	write(1,&c,1);
-	return(1);
+
+	c = va_arg(fmt->ap, int);
+	write(1, &c, 1);
+	return (1);
 }

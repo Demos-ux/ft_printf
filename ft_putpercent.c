@@ -14,8 +14,7 @@
 
 int	ft_putpercent(t_format *fmt)
 {
-    (void)fmt;
-    write(1, "%", 1);
-    return (1);
+	(void)fmt;
+	write(1, "%", 1);
+	return (1);
 }
-

@@ -14,20 +14,19 @@
 
 int	ft_putstr(t_format *fmt)
 {
-	int	i;
+	int		i;
+	char	*s;
 
 	i = 0;
-	char	*s;
 	s = va_arg(fmt->ap, char *);
-
 	if (!s)
 	{
-		write(1,"(null)",6);
-		return(6);
+		write(1, "(null)", 6);
+		return (6);
 	}
 	while (s[i] != '\0')
 	{
-		write(1,&s[i],1);
+		write(1, &s[i], 1);
 		i++;
 	}
 	return (i);

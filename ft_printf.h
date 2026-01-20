@@ -6,23 +6,17 @@
 /*   By: dsisli <dsisli@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:48:41 by dsisli            #+#    #+#             */
-/*   Updated: 2026/01/20 15:16:04 by dsisli           ###   ########.fr       */
+/*   Updated: 2026/01/20 17:33:04 by dsisli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <unistd.h>
-
 #ifndef FT_PRINTF_H
-#define FT_PRINTF_H
+# define FT_PRINTF_H
+
+# include <stdarg.h>
+# include <unistd.h>
 
 typedef struct s_format	t_format;
-
-typedef struct s_formatype
-{
-	char	type;
-	int		(*func)(t_format *fmt);
-}	t_fmttype;
 
 typedef struct s_format
 {
@@ -30,15 +24,6 @@ typedef struct s_format
 	char	*format;
 	int		i;
 	int		total;
-
-	int		flag_minus;
-	int		flag_zero;
-	int		flag_plus;
-	int		flag_space;
-	int		flag_hash;
-	int		width;
-	int		precision;
-
 }	t_format;
 
 int	ft_putstr(t_format *fmt);

@@ -6,7 +6,7 @@
 /*   By: dsisli <dsisli@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:41:59 by dsisli            #+#    #+#             */
-/*   Updated: 2025/10/30 15:54:43 by dsisli           ###   ########.fr       */
+/*   Updated: 2026/01/20 17:16:53 by dsisli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	ft_printf(const char *format, ...)
 	va_end(fmt.ap);
 	return (fmt.total);
 }
-
 // #include "ft_printf.h"
 // #include <stdio.h>
 // #include <limits.h>
@@ -172,7 +171,8 @@ int	ft_printf(const char *format, ...)
 //     ret = ft_printf("");
 //     printf("Return value: %d\n\n", ret);
 
-//     // Only percent without specifier (should not crash, but undefined behavior)
+//
+// Only percent without specifier (should not crash,but undefined behavior)
 //     printf("25. Only percent without specifier:\n");
 //     ret = ft_printf("%");
 //     printf("Return value: %d\n\n", ret);
@@ -191,6 +191,5 @@ int	ft_printf(const char *format, ...)
 //     printf("Return value: %d\n\n", ret);
 
 //     printf("All tests completed.\n");
-//     return 0;
+//     return (0);
 // }
-

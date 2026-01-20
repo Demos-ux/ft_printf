@@ -29,8 +29,8 @@ static int	puthex_recursive(unsigned long n)
 
 int	ft_puthex(t_format *fmt)
 {
-    unsigned int	n;
+	unsigned int	n;
 
-    n = va_arg(fmt->ap, unsigned int);
-    return (puthex_recursive(n));
+	n = va_arg(fmt->ap, unsigned int);
+	return (puthex_recursive(n));
 }

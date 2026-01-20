@@ -13,25 +13,25 @@
 #include "ft_printf.h"
 
 static void	ft_putnbr_helper(long num);
-static int		ft_numlen(long num);
+static int	ft_numlen(long num);
 
 int	ft_putnbr(t_format *fmt)
 {
 	int		n;
-    long	num;
-    char	c;
-    int		len;
+	long	num;
+	char	c;
+	int		len;
 
-    n = va_arg(fmt->ap, int);
-    num = n;
-    len = ft_numlen(num);
-    if (num < 0)
-    {
-        write(1, "-", 1);
-        num = -num;
-    }
-    if (num >= 10)
-    {
+	n = va_arg(fmt->ap, int);
+	num = n;
+	len = ft_numlen(num);
+	if (num < 0)
+	{
+		write(1, "-", 1);
+		num = -num;
+	}
+	if (num >= 10)
+	{
 		ft_putnbr_helper(num / 10);
 	}
 	c = (num % 10) + '0';
